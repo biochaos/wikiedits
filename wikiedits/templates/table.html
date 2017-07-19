@@ -1,0 +1,77 @@
+<div class="h6">
+    <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapseOptions" aria-expanded="false" aria-controls="collapseOptions">
+      Filter settings
+      <span class="caret"></span>
+    </button>
+</div>
+<div class="collapse" id="collapseOptions">
+    <div class="menubar" id="menubar-id"> 
+        <div>
+            <div class="dropdown btn-group" id="drop1">
+                <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    {{ interval_text }}
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    {% for val, text in interval_menu %}
+                        {% if val == interval %}
+                            <li><a href="#"><span class="glyphicon glyphicon-ok" aria-hidden="true" style="padding: 5xp;"></span>{{ text }}</a></li>
+                        {% else %}
+                            <li><a href="#" class="ddm-item" id="/_data?s={{sysfile}}&t={{val}}"><span class="glyphicon glyphicon-ok" aria-hidden="true" style="visibility: hidden; padding: 5xp;"></span>{{ text }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="dropdown btn-group" id="drop2">
+                <button class="btn btn-default btn-xs dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    {{ sysfile_text }}
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    {% for val, text in sysfile_menu %}
+                        {% if val == sysfile %}
+                            <li><a href="#"><span class="glyphicon glyphicon-ok" aria-hidden="true" style="padding: 5xp;"></span>{{ text }}</a></li>
+                        {% else %}
+                            <li><a href="#" class="ddm-item" id="/_data?s={{val}}&t={{interval}}"><span class="glyphicon glyphicon-ok" aria-hidden="true" style="visibility: hidden; padding: 5xp;"></span>{{ text }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="btn-group" id="reset">
+            <button class="btn btn-xs btn-default" type="button" aria-haspopup="true" aria-expanded="true">Reset settings</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="table">
+    <table>
+        <tbody>
+            <tr id="table-header">
+                <td class="col-md-1" id="row-id-header">
+                    
+                </td>
+                <td class="col-md-1"  id="row-count-header">
+                    # of edits
+                </td>
+                <td class="col-md-10"  id="row-link-header">
+                    Page
+                </td>                    
+            </tr>
+            {% for id, url, title, count in res %}
+            <tr id="row_{{ id }}">
+                <td class="col-md-1" id="row-id">
+                    {{ id }}
+                </td>
+                <td class="col-md-1"  id="row-count">
+                    {{ count }}
+                </td>
+                <td class="col-md-10"  id="row-link">
+                    <a href= "{{ url }}"  target="_blank">{{ title }}</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr><td>found</td><td>nothing</td><td>:O</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

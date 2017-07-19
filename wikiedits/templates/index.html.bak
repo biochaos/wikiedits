@@ -1,0 +1,57 @@
+{% extends "bootstrap/base.html" %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rtl/3.2.0-rc2/css/bootstrap-rtl.min.css">
+<link rel="shortcut icon" href="{{ url_for('static', filename='Wikipedia-favicon.png') }}">
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+{% endblock %}
+
+{% block title %}מצעד הערוכים{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 padded" id="zadon">
+        <h1>מצעד הערוכים</h1>
+        <h3>דפי ויקיפדיה שנערכו הכי הרבה פעמים</h3>
+        <div id="table-container">
+            <table  class="table">
+                <tbody>
+                    <tr id="table-header">
+                        <td class="col-md-1" id="row-id-header">
+                            
+                        </td>
+                        <td class="col-md-1"  id="row-count-header">
+                            מספר עריכות
+                        </td>
+                        <td class="col-md-10"  id="row-link-header">
+                            עמוד (לינק)
+                        </td>                    
+                    </tr>
+                    {% for id, url, title, count in res %}
+                    <tr id="row_{{ id }}">
+                        <td class="col-md-1" id="row-id">
+                            {{ id }}
+                        </td>
+                        <td class="col-md-1"  id="row-count">
+                            {{ count }}
+                        </td>
+                        <td class="col-md-10"  id="row-link">
+                            <a href= "{{ url }}" >{{ title }}</a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr><td>לא</td><td>מצאנו</td><td>כלום</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

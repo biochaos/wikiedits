@@ -1,0 +1,88 @@
+{% extends "bootstrap/base.html" %}
+
+{% block styles %}
+{{super()}}
+<link rel="shortcut icon" href="{{ url_for('static', filename='Wikipedia-favicon.png') }}">
+<link rel="stylesheet" href="{{url_for('.static', filename='css/wikiedits.css')}}">
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{url_for('static', filename='scripts/wikiedits.js') }}"></script>
+<script src="{{url_for('static', filename='scripts/myga.js') }}"></script>
+<script type=text/javascript>
+  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+{% endblock %}
+
+{% block title %}Wikipedia Edits Chart{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 padded" id="wikiedits">
+        <h1>Wikipedia Edits Chart</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 col-xs-12 h4">
+      This page displays a list of the most edited wikipedia pages (with or without backend pages) for the selected time period.
+    </div>    
+    <div class="col-md-2 col-md-offset-0 col-xs-12 col-xs-off-set-0">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-0 col-xs-2 col-xs-offset-4">
+          <!-- ABOUT Button trigger modal -->
+          <button type="button" class="btn btn-primary btn-xs h4 pull-left" data-toggle="modal" data-target="#aboutModal">
+            About
+          </button>
+          <!-- Modal -->
+          <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="aboutModalLabel">About</h4>
+                </div>
+                <div class="modal-body">
+                  <p><strong>What's going on?</strong></br>
+                  Our server gathers real time meta-data regarding (English) wikipedia page edits, proccesses the information, and presents the 50 most edited pages for the given time frame (a week by defedault). Data can be presented with or without system pages (default is without), or even only system pages.</p>
+                  <p><strong>Who built this, and why?</strong></br>
+                  I did. :)&nbsp;</br>
+                  I was looking for a small web app to develop, and thought this might help the wikipedian community.</p>
+                  <p><strong>How does the site work?</strong></br>
+                  The site is written in python (3.4).</br>
+                  I used several packages, most notably flask.</br>
+                  If you're interested, the whole thing's on <a href="https://github.com/biochaos/wikiedits" target="_blank">github</a>.</p>
+                  <p><strong>How canI contact you?</strong></br>
+                  For now,you can email us at&nbsp;<a href="mailto:wikieditsxyz@gmail.com" target="_blank">wikieditsxyz@gmail.com</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-xs-3">
+          <!-- STATS Button trigger modal -->
+          <button type="button" class="btn btn-primary btn-xs h4 pull-left" data-toggle="modal" data-target="#statsModal">
+              Stats
+          </button>
+          <!-- Modal -->
+          <div class="modal fade" id="statsModal" tabindex="-1" role="dialog" aria-labelledby="statsModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="statsModalLabel">Stats</h4>
+                </div>
+                <div class="modal-body" id="statsModalBody">computing... <!-- content is loaded here -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="table-container">
+  </div>
+</div>
+{% endblock %}

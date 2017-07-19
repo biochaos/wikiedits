@@ -1,0 +1,11 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+myga.js
+
+*.log
+*.pid
+data/
+logs/

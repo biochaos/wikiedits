@@ -1,0 +1,16 @@
+/*
+.menubar {
+    background-color: #ddd;
+}
+*/
+
+.btn-default {
+    border: none;
+    font-weight: lighter;
+    padding-left: 5px;
+    /*background-color: #f5f5f5;*/
+}
+
+.dropdown-menu {
+    font-size: small;
+}
